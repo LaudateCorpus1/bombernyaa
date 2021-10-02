@@ -1,3 +1,4 @@
+import 'package:bombernyaa/models/constants/route_names.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -17,6 +18,7 @@ class HomeController extends GetxController {
   }
 
   void toGameMenu() {
-    print("${id!.text}");
+    // print("${id!.text}");
+    Get.toNamed(routeName.reverse[RouteNames.gameMemu]!);
   }
 }
