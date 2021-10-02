@@ -6,7 +6,7 @@ class Routes {
   static final route = [
     GetPage(
       name: '/',
-      page: () => const Home(),
+      page: () => Home(),
       binding: HomeBinding(),
     ),
   ];
