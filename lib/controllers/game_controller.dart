@@ -9,7 +9,10 @@ class GameController extends GetxController {
 
   void rollNumber() {
     _generateRandomNumber();
-
+    _showRandomNumber(
+      title: 'Random Number',
+      middleText: rolledNumber.value.toString(),
+    );
   }
 
   void _generateRandomNumber() {
@@ -18,7 +21,7 @@ class GameController extends GetxController {
     rolledNumber.value = rollNumber;
   }
 
-  void showRandomNumber({required String title, required String middleText}) {
+  void _showRandomNumber({required String title, required String middleText}) {
     Get.defaultDialog(
       title: title,
       middleText: middleText,

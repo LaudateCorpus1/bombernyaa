@@ -14,7 +14,7 @@ class Routes {
     ),
     GetPage(
       name: routeName.reverse[RouteNames.gameMemu]!,
-      page: () => const GameMenu(),
+      page: () => GameMenu(),
       binding: GameBinding(),
     ),
   ];
