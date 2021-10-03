@@ -13,16 +13,12 @@ class GameMenu extends StatelessWidget {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: const [
-              PlayerPoint(),
-              Expanded(
-                child: GameBoard(),
-              ),
-            ],
-          ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            PlayerPoint(),
+            GameBoard(),
+          ],
         ),
       ),
       floatingActionButton: ElevatedButton(
