@@ -1,4 +1,6 @@
+import 'package:bombernyaa/controllers/game_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class Tile extends StatefulWidget {
   final int index;
@@ -9,6 +11,7 @@ class Tile extends StatefulWidget {
 }
 
 class _TileState extends State<Tile> with SingleTickerProviderStateMixin {
+  final GameController _gameController = Get.find();
   Animation<Color?>? animation;
   AnimationController? controller;
 
@@ -44,7 +47,9 @@ class _TileState extends State<Tile> with SingleTickerProviderStateMixin {
           width: 5,
           decoration: BoxDecoration(
             border: Border.all(
-              color: widget.index != 1 ? Colors.black : animation!.value!,
+              color: widget.index != _gameController.rolledNumber.value
+                  ? Colors.black
+                  : animation!.value!,
               width: 3,
             ),
           ),
