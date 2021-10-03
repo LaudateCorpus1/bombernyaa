@@ -1,4 +1,5 @@
 import 'package:bombernyaa/models/constants/route_names.dart';
+import 'package:bombernyaa/routes/bindings/game_binding.dart';
 import 'package:bombernyaa/routes/bindings/home_binding.dart';
 import 'package:bombernyaa/views/game_menu.dart';
 import 'package:bombernyaa/views/home.dart';
@@ -14,6 +15,7 @@ class Routes {
     GetPage(
       name: routeName.reverse[RouteNames.gameMemu]!,
       page: () => const GameMenu(),
+      binding: GameBinding(),
     ),
   ];
 }
