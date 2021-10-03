@@ -1,3 +1,5 @@
+import 'package:bombernyaa/widgets/game_board.dart';
+import 'package:bombernyaa/widgets/player_point.dart';
 import 'package:flutter/material.dart';
 
 class GameMenu extends StatelessWidget {
@@ -6,7 +8,31 @@ class GameMenu extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: const [
+              PlayerPoint(),
+              Expanded(
+                child: GameBoard(),
+              ),
+            ],
+          ),
+        ),
+      ),
+      floatingActionButton: ElevatedButton(
+        onPressed: () {},
+        child: const SizedBox(
+          height: 50,
+          width: 200,
+          child: Center(
+            child: Text("Click here!"),
+          ),
+        ),
+      ),
     );
   }
 }
