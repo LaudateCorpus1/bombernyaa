@@ -1,3 +1,4 @@
+import 'package:bombernyaa/widgets/tile.dart';
 import 'package:flutter/material.dart';
 
 class GameBoard extends StatelessWidget {
@@ -6,23 +7,11 @@ class GameBoard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GridView.count(
+      shrinkWrap: true,
       crossAxisCount: 7,
       children: List.generate(
         70,
-        (index) => Container(
-          height: 5,
-          width: 5,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: Colors.black,
-            ),
-          ),
-          child: Center(
-            child: Text(
-              index.toString(),
-            ),
-          ),
-        ),
+        (index) => Tile(index: index),
       ),
     );
   }
