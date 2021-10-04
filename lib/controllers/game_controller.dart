@@ -43,7 +43,11 @@ class GameController extends GetxController {
   void _generateRandomNumber() {
     Random random = Random();
     int rollNumber = random.nextInt(8);
-    rolledNumber.value = rollNumber;
+    if (rollNumber == 0) {
+      _generateRandomNumber();
+    } else {
+      rolledNumber.value = rollNumber;
+    }
   }
 
   void playerMovement(String currentIndex, int id) {
