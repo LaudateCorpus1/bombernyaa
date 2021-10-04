@@ -42,20 +42,25 @@ class _TileState extends State<Tile> with SingleTickerProviderStateMixin {
     return AnimatedBuilder(
       animation: animation!,
       builder: (context, child) {
-        return Container(
-          height: 5,
-          width: 5,
-          decoration: BoxDecoration(
-            border: Border.all(
-              color: widget.index != _gameController.rolledNumber.value
-                  ? Colors.black
-                  : animation!.value!,
-              width: 3,
+        return InkWell(
+          onTap: () {
+            _gameController.selectedTiles.value = widget.index;
+          },
+          child: Container(
+            height: 5,
+            width: 5,
+            decoration: BoxDecoration(
+              border: Border.all(
+                color: widget.index != _gameController.selectedTiles.value
+                    ? Colors.black
+                    : animation!.value!,
+                width: 3,
+              ),
             ),
-          ),
-          child: Center(
-            child: Text(
-              widget.index.toString(),
+            child: Center(
+              child: Text(
+                _gameController.tilesIndex[widget.index],
+              ),
             ),
           ),
         );
