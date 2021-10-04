@@ -18,7 +18,9 @@ class _TileState extends State<Tile> with SingleTickerProviderStateMixin {
   @override
   initState() {
     controller = AnimationController(
-        duration: const Duration(milliseconds: 500), vsync: this);
+      duration: const Duration(milliseconds: 500),
+      vsync: this,
+    );
 
     final CurvedAnimation curve =
         CurvedAnimation(parent: controller!, curve: Curves.ease);
@@ -44,25 +46,29 @@ class _TileState extends State<Tile> with SingleTickerProviderStateMixin {
       builder: (context, child) {
         return InkWell(
           onTap: () {
-            _gameController.selectedTiles.value = widget.index;
+            if (_gameController.movement.contains(widget.index)) {
+              _gameController.selectedTiles.value = widget.index;
+            }
           },
-          child: Container(
-            height: 5,
-            width: 5,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: !_gameController.movement.contains(widget.index)
-                    ? Colors.black
-                    : animation!.value!,
-                width: 3,
-              ),
-            ),
-            child: Center(
-              child: Text(
-                _gameController.tilesIndex[widget.index],
-              ),
-            ),
-          ),
+          child: Obx(() => Container(
+                height: 5,
+                width: 5,
+                decoration: BoxDecoration(
+                  border: Border.all(
+                    color: _gameController.selectedTiles.value == widget.index
+                        ? Colors.green
+                        : _gameController.movement.contains(widget.index)
+                            ? animation!.value!
+                            : Colors.black,
+                    width: 3,
+                  ),
+                ),
+                child: Center(
+                  child: Text(
+                    _gameController.tilesIndex[widget.index],
+                  ),
+                ),
+              )),
         );
       },
     );
