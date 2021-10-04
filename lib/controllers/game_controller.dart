@@ -17,8 +17,12 @@ class GameController extends GetxController {
   }
 
   void rollNumber() {
+    _resetState();
     _generateRandomNumber();
-    playerNextMove(tilesIndex[selectedTiles.value], 1);
+    playerMovement(
+      tilesIndex[selectedTiles.value],
+      rolledNumber.value,
+    );
     _showRandomNumber(
       title: 'Random Number',
       middleText: rolledNumber.value.toString(),
@@ -42,27 +46,27 @@ class GameController extends GetxController {
     rolledNumber.value = rollNumber;
   }
 
-  void playerNextMove(String currentIndex, int id) {
+  void playerMovement(String currentIndex, int id) {
     switch (id) {
       case 1:
         _straightMove(currentIndex, 1);
         break;
-        case 2:
+      case 2:
         _straightMove(currentIndex, 2);
         break;
-        case 3:
+      case 3:
         _straightMove(currentIndex, 3);
         break;
-        case 4:
-        _straightMove(currentIndex, 1);
+      case 4:
+        _diagonalMove(currentIndex, 1);
         break;
-        case 5:
-        _straightMove(currentIndex, 1);
+      case 5:
+        _diagonalMove(currentIndex, 2);
         break;
-        case 6:
-        _straightMove(currentIndex, 1);
+      case 6:
+        _diagonalMove(currentIndex, 3);
         break;
-        case 7:
+      case 7:
         _straightMove(currentIndex, 1);
         break;
       default:
@@ -99,6 +103,42 @@ class GameController extends GetxController {
         movement.add(index);
       }
     }
+  }
+
+  _diagonalMove(String currentIndex, int jumpedTile) {
+    String ab = '';
+    int index = 0;
+    int yIndex = 0;
+    List<String> xy = currentIndex.split('');
+    int x = int.parse(xy[0]);
+    String y = xy[1];
+    for (int i = 1; i <= jumpedTile; i++) {
+      yIndex = alphabets.indexOf(y);
+      if ((x - i) >= 1 && (yIndex - i) >= 0) {
+        ab = (x - i).toString() + alphabets[(yIndex - i)];
+        index = tilesIndex.indexOf(ab);
+        movement.add(index);
+      }
+      if ((x - i) >= 1 && (yIndex + i) <= 6) {
+        ab = (x - i).toString() + alphabets[(yIndex + i)];
+        index = tilesIndex.indexOf(ab);
+        movement.add(index);
+      }
+      if ((x + i) >= 1 && (yIndex - i) >= 0) {
+        ab = (x + i).toString() + alphabets[(yIndex - i)];
+        index = tilesIndex.indexOf(ab);
+        movement.add(index);
+      }
+      if ((x + i) >= 1 && (yIndex + i) <= 6) {
+        ab = (x + i).toString() + alphabets[(yIndex + i)];
+        index = tilesIndex.indexOf(ab);
+        movement.add(index);
+      }
+    }
+  }
+
+  void _resetState() {
+    movement.value = [];
   }
 
   void _showRandomNumber({required String title, required String middleText}) {
