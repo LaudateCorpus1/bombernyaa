@@ -51,7 +51,7 @@ class _TileState extends State<Tile> with SingleTickerProviderStateMixin {
             width: 5,
             decoration: BoxDecoration(
               border: Border.all(
-                color: widget.index != _gameController.selectedTiles.value
+                color: !_gameController.movement.contains(widget.index)
                     ? Colors.black
                     : animation!.value!,
                 width: 3,
