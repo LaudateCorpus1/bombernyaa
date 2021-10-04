@@ -33,7 +33,7 @@ class GameController extends GetxController {
     List<String> temp = [];
     for (int i = 1; i <= 10; i++) {
       for (int j = 0; j <= 6; j++) {
-        String index = i.toString() + alphabets[j];
+        String index = i.toString() + " " + alphabets[j];
         temp.add(index);
       }
     }
@@ -81,28 +81,28 @@ class GameController extends GetxController {
     String ab = '';
     int index = 0;
     int yIndex = 0;
-    List<String> xy = currentIndex.split('');
+    List<String> xy = currentIndex.split(' ');
     int x = int.parse(xy[0]);
     String y = xy[1];
     for (int i = 1; i <= jumpedTile; i++) {
       yIndex = alphabets.indexOf(y);
       if ((x - i) >= 1) {
-        ab = (x - i).toString() + y;
+        ab = (x - i).toString() + " " + y;
         index = tilesIndex.indexOf(ab);
         movement.add(index);
       }
       if ((x + i) <= 10) {
-        ab = (x + i).toString() + y;
+        ab = (x + i).toString() + " " + y;
         index = tilesIndex.indexOf(ab);
         movement.add(index);
       }
       if ((yIndex - i) >= 0) {
-        ab = x.toString() + alphabets[(yIndex - i)];
+        ab = x.toString() + " " + alphabets[(yIndex - i)];
         index = tilesIndex.indexOf(ab);
         movement.add(index);
       }
       if ((yIndex + i) <= 6) {
-        ab = x.toString() + alphabets[(yIndex + i)];
+        ab = x.toString() + " " + alphabets[(yIndex + i)];
         index = tilesIndex.indexOf(ab);
         movement.add(index);
       }
@@ -113,28 +113,28 @@ class GameController extends GetxController {
     String ab = '';
     int index = 0;
     int yIndex = 0;
-    List<String> xy = currentIndex.split('');
+    List<String> xy = currentIndex.split(' ');
     int x = int.parse(xy[0]);
     String y = xy[1];
     for (int i = 1; i <= jumpedTile; i++) {
       yIndex = alphabets.indexOf(y);
       if ((x - i) >= 1 && (yIndex - i) >= 0) {
-        ab = (x - i).toString() + alphabets[(yIndex - i)];
+        ab = (x - i).toString() + " " + alphabets[(yIndex - i)];
         index = tilesIndex.indexOf(ab);
         movement.add(index);
       }
       if ((x - i) >= 1 && (yIndex + i) <= 6) {
-        ab = (x - i).toString() + alphabets[(yIndex + i)];
+        ab = (x - i).toString() + " " + alphabets[(yIndex + i)];
         index = tilesIndex.indexOf(ab);
         movement.add(index);
       }
       if ((x + i) >= 1 && (yIndex - i) >= 0) {
-        ab = (x + i).toString() + alphabets[(yIndex - i)];
+        ab = (x + i).toString() + " " + alphabets[(yIndex - i)];
         index = tilesIndex.indexOf(ab);
         movement.add(index);
       }
       if ((x + i) >= 1 && (yIndex + i) <= 6) {
-        ab = (x + i).toString() + alphabets[(yIndex + i)];
+        ab = (x + i).toString() + " " + alphabets[(yIndex + i)];
         index = tilesIndex.indexOf(ab);
         movement.add(index);
       }
