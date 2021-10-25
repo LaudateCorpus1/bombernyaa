@@ -10,7 +10,8 @@ class GameController extends GetxController {
   RxInt rolledNumber = 0.obs;
   RxList<int> movement = RxList<int>();
   List<String> tilesIndex = [];
-  RxList<double> initBoardState = RxList<double>();
+  RxList<String> initBoardState = RxList<String>();
+  RxInt player = 1.obs;
 
   @override
   void onInit() {
@@ -45,8 +46,8 @@ class GameController extends GetxController {
 
   Color boardState(int index) {
     Color colorTile;
-    double state = initBoardState[index];
-    switch (state.toString()) {
+    String state = initBoardState[index];
+    switch (state) {
       case '1.0':
         colorTile = Colors.red.shade900;
         break;
