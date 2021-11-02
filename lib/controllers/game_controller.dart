@@ -50,6 +50,12 @@ class GameController extends GetxController {
       case 'chooseMove':
         changeStateBoard();
         state.value = 'pickPion';
+        // change to other player
+        if (player.value == '1') {
+          player.value = '2';
+        } else if (player.value == '2') {
+          player.value = '1';
+        }
         playerState();
         break;
       default:
