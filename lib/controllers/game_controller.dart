@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 
 class GameController extends GetxController {
   static final List<String> alphabets = ['A', 'B', 'C', 'D', 'E', 'F', 'G'];
-  RxInt selectedTiles = 0.obs;
+  RxInt selectedTiles = (-1).obs;
   RxInt rolledNumber = 0.obs;
   RxList<int> movement = RxList<int>();
   List<String> tilesIndex = [];
@@ -44,8 +44,17 @@ class GameController extends GetxController {
         state.value = 'roll';
         break;
       case 'roll':
-        rollNumber();
-        state.value = 'chooseMove';
+        if (selectedTiles.value == (-1) ||
+            lastIndex.value == selectedTiles.value) {
+          _showRandomNumber(
+            title: '',
+            middleText: 'Pilih pion terlebih dahulu',
+          );
+        } else {
+          rollNumber();
+          state.value = 'chooseMove';
+          lastIndex.value = selectedTiles.value;
+        }
         break;
       case 'chooseMove':
         changeStateBoard();
@@ -64,7 +73,6 @@ class GameController extends GetxController {
 
   void rollNumber() {
     _resetState();
-    lastIndex.value = selectedTiles.value;
     _generateRandomNumber();
     playerMovement(
       tilesIndex[selectedTiles.value],
