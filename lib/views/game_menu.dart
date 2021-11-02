@@ -23,7 +23,7 @@ class GameMenu extends StatelessWidget {
         ),
       ),
       floatingActionButton: ElevatedButton(
-        onPressed: () => _gameController.rollNumber(),
+        onPressed: () => _gameController.playerState(),
         child: const SizedBox(
           height: 50,
           width: 200,

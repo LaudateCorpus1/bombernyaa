@@ -11,17 +11,54 @@ class GameController extends GetxController {
   RxList<int> movement = RxList<int>();
   List<String> tilesIndex = [];
   RxList<String> initBoardState = RxList<String>();
-  RxInt player = 1.obs;
+  RxString player = '1'.obs;
+  RxInt lastIndex = (-1).obs;
+  RxString state = ''.obs;
 
   @override
   void onInit() {
     _createBoardIndex();
     initBoardState.value = boardStateDummy;
+    state.value = 'pickPion';
+    playerState();
     super.onInit();
+  }
+
+  void changeStateBoard() {
+    String playerPion = initBoardState[lastIndex.value];
+    initBoardState[selectedTiles.value] = playerPion;
+    if (lastIndex.value.clamp(21, 27) == lastIndex.value ||
+        lastIndex.value.clamp(42, 48) == lastIndex.value) {
+      initBoardState[lastIndex.value] = '7.1';
+    } else if (lastIndex.value.clamp(28, 41) == lastIndex.value) {
+      initBoardState[lastIndex.value] = '7.0';
+    } else {
+      initBoardState[lastIndex.value] = '0.0';
+    }
+  }
+
+  void playerState() {
+    switch (state.value) {
+      case 'pickPion':
+        _playerSelectableTile();
+        state.value = 'roll';
+        break;
+      case 'roll':
+        rollNumber();
+        state.value = 'chooseMove';
+        break;
+      case 'chooseMove':
+        changeStateBoard();
+        state.value = 'pickPion';
+        playerState();
+        break;
+      default:
+    }
   }
 
   void rollNumber() {
     _resetState();
+    lastIndex.value = selectedTiles.value;
     _generateRandomNumber();
     playerMovement(
       tilesIndex[selectedTiles.value],
@@ -31,6 +68,16 @@ class GameController extends GetxController {
       title: 'Random Number',
       middleText: rolledNumber.value.toString(),
     );
+  }
+
+  void _playerSelectableTile() {
+    _resetState();
+    for (int i = 0; i < initBoardState.length; i++) {
+      List<String> id = initBoardState[i].split('.');
+      if (id[0] == player.value && id[1] != '0') {
+        movement.add(i);
+      }
+    }
   }
 
   void _createBoardIndex() {
